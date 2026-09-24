@@ -1,7 +1,7 @@
 local ADDON_NAME = ...
 
-local QuickQuest = CreateFrame("Frame")
-QuickQuest.enabled = true
+local QuickQuestForever = CreateFrame("Frame")
+QuickQuestForever.enabled = true
 
 -- Hold Shift to skip automation for a single interaction
 local function IsBypassed()
@@ -9,7 +9,7 @@ local function IsBypassed()
 end
 
 local function ShouldAct()
-    return QuickQuest.enabled and not IsBypassed()
+    return QuickQuestForever.enabled and not IsBypassed()
 end
 
 -- ===== Quest accept / turn-in =====
@@ -79,19 +79,19 @@ end
 
 -- ===== Event wiring =====
 
-QuickQuest:RegisterEvent("ADDON_LOADED")
-QuickQuest:RegisterEvent("QUEST_DETAIL")
-QuickQuest:RegisterEvent("QUEST_PROGRESS")
-QuickQuest:RegisterEvent("QUEST_COMPLETE")
-QuickQuest:RegisterEvent("QUEST_GREETING")
-QuickQuest:RegisterEvent("GOSSIP_SHOW")
+QuickQuestForever:RegisterEvent("ADDON_LOADED")
+QuickQuestForever:RegisterEvent("QUEST_DETAIL")
+QuickQuestForever:RegisterEvent("QUEST_PROGRESS")
+QuickQuestForever:RegisterEvent("QUEST_COMPLETE")
+QuickQuestForever:RegisterEvent("QUEST_GREETING")
+QuickQuestForever:RegisterEvent("GOSSIP_SHOW")
 
-QuickQuest:SetScript("OnEvent", function(self, event, arg1)
+QuickQuestForever:SetScript("OnEvent", function(self, event, arg1)
     if event == "ADDON_LOADED" then
         if arg1 == ADDON_NAME then
-            QuickQuestDB = QuickQuestDB or { enabled = true }
-            QuickQuest.enabled = QuickQuestDB.enabled
-            print("|cff33ff99QuickQuest|r loaded. /qq to toggle, hold Shift to bypass.")
+            QuickQuestForeverDB = QuickQuestForeverDB or { enabled = true }
+            QuickQuestForever.enabled = QuickQuestForeverDB.enabled
+            print("|cff33ff99QuickQuestForever|r loaded. /qq to toggle, hold Shift to bypass.")
         end
     elseif event == "QUEST_DETAIL" then
         AutoAcceptQuest()
@@ -110,7 +110,7 @@ end)
 
 SLASH_QUICKQUEST1 = "/qq"
 SlashCmdList["QUICKQUEST"] = function()
-    QuickQuest.enabled = not QuickQuest.enabled
-    QuickQuestDB.enabled = QuickQuest.enabled
-    print("|cff33ff99QuickQuest|r " .. (QuickQuest.enabled and "enabled" or "disabled"))
+    QuickQuestForever.enabled = not QuickQuestForever.enabled
+    QuickQuestForeverDB.enabled = QuickQuestForever.enabled
+    print("|cff33ff99QuickQuestForever|r " .. (QuickQuestForever.enabled and "enabled" or "disabled"))
 end

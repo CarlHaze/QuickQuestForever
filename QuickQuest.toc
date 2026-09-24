@@ -1,8 +1,0 @@
-## Interface: 16001
-## Title: QuickQuest
-## Notes: Auto-accepts and auto-completes quests. Hold Shift to bypass. /qq to toggle.
-## Author: HazeyOne
-## Version: 0.1
-## SavedVariables: QuickQuestDB
-
-QuickQuest.lua
